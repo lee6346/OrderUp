@@ -8,6 +8,5 @@ node_modules
 .npm
 
 .vscode
-.env
 
-app/server/config/keys.js
+app/server/config/dev.js
