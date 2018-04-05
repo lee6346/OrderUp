@@ -1,0 +1,18 @@
+bin/: 
+    - directory for defining any startup scripts
+    bin/www:
+    - startful file that creates/runs the server instane with port configurations and injects the app.js modules 
+    bin/test, bin/stop, bin/restart, etc:
+    - different startup files you can place in the bin folder to for running test server, stopping server, etc 
+    
+    package.json-> scripts{}: change the start, debug, test, etc to these files 
+    Procfile-> web: npm start, test: npm test, etc -> for heroku apps 
+
+creates the server instance, port configs,  and passes the app.js module into it 
+    - separates middleware from running the app to maintain independently
+    - one exception is that 
+app.js: contains all middleware and mvc routes
+
+
+https://stackoverflow.com/questions/36638123/learning-node-js-express-js-whats-the-deal-with-bin-www
+https://stackoverflow.com/questions/23169941/what-does-bin-www-do-in-express-4-x
