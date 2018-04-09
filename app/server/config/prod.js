@@ -3,5 +3,6 @@ module.exports = {
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     cookieKey: process.env.COOKIE_KEY,
     mongoURI: process.env.MONGO_URI,
-    googleRedirectURI: 'https://chef-connect.herokuapp.com'
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY
 };
