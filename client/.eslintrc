@@ -1,0 +1,33 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "mocha": true,
+        "commonjs": true
+    },
+    "plugins": [
+        "prettier"
+    ],
+    "extends": [
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "trailingComma": "es5",
+                "singleQuote": true,
+                "printWidth": 120
+            }
+        ],
+        "no-console": "off"
+    }
+}

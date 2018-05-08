@@ -1,0 +1,8 @@
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const AUTHENTICATE = 'AUTHENTICATE';
+export const UNAUTHENTICATE = 'UNAUTHENTICATE';
+
+export const FETCH_MENUS = 'FETCH_MENUS';
+export const LOAD_COORDINATES = 'LOAD_COORDINATES';
+
+export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
