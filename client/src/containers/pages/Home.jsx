@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadCoordinates } from '../../actions/search';
-import MenuImageUpload from '../MenuImageUpload';
+import { Route, Switch } from 'react-router-dom';
+import { getCurrentCoordinates } from '../../actions/geocoordinates';
+import { fetchUser } from '../../actions/account';
+import Main from './Main';
+import Account from './Account';
+import RequireAuth from '../wrappers/RequireAuth';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.loadCoordinates();
+    if (this.props.authenticated) {
+      this.props.getCurrentCoordinates();
+      this.props.fetchUser();
+    }
   }
-
   render() {
+    const { match } = this.props;
     return (
       <div>
-        <MenuImageUpload />
-        {this.props.coordinates ? this.props.coordinates.lat : 'no'}
+        <Route exact path="/home/account" component={Account} />
+        <Route exact path={match.path} component={Main} />
       </div>
     );
   }
 }
-
 function mapStateToProps(state) {
-  return {
-    coordinates: state.search.coordinates,
-  };
+  return { authenticated: state.account.authenticated };
 }
-
-export default connect(mapStateToProps, { loadCoordinates })(Home);
+export default connect(mapStateToProps, { getCurrentCoordinates, fetchUser })(Home);

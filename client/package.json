@@ -2,17 +2,19 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "api/*": {
-      "target": "http://localhost:5000"
-    }
-  },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "0.0.19",
+    "ajv": "^6.5.0",
     "bootstrap": "^4.1.0",
+    "font-awesome": "^4.7.0",
+    "google-maps-react": "^2.0.2",
     "materialize-css": "^0.100.2",
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.1",
-    "query-string": "^6.0.0",
+    "query-string": "^6.1.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
@@ -20,6 +22,7 @@
     "react-scripts": "1.1.4",
     "react-stripe-checkout": "^2.6.3",
     "react-transition-group": "^2.3.1",
+    "recompose": "^0.27.0",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "redux-thunk": "^2.2.0",

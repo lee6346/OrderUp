@@ -26,10 +26,10 @@ class Public extends Component {
                 </ol>
                 <div className="carousel-inner">
                   <div className="carousel-item active">
-                    <img src={cater1} className="d-block image-fluid fixed-image" />
+                    <img src={cater1} className="d-block image-fluid fixed-image" alt="blah1" />
                   </div>
                   <div className="carousel-item">
-                    <img src={cater2} className="d-block image-fluid fixed-image" />
+                    <img src={cater2} className="d-block image-fluid fixed-image" alt="blah2" />
                   </div>
                 </div>
                 <a className="carousel-control-prev" href="#caterSet1" role="button" data-slide="prev">
@@ -64,7 +64,7 @@ class Public extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
+    authenticated: state.account.authenticated,
   };
 }
 

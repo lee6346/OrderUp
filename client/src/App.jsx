@@ -14,9 +14,9 @@ class App extends Component {
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path="/authentication" component={Authentication} />
-            <Route exact path="/home" component={RequireAuth(Home)} />
             <Route exact path="/" component={Public} />
+            <Route exact path="/authentication" component={Authentication} />
+            <Route path="/home" component={RequireAuth(Home)} />
           </Switch>
         </div>
       </div>

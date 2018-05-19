@@ -1,10 +1,13 @@
-import { combineReducers } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import { reducer as form } from 'redux-form';
-import authReducer from './auth';
-import searchReducer from './search';
-
+import geoCoordinatesReducer from './geocoordinates';
+import criteriaReducer from './criteria';
+import menuReducer from './menu';
+import accountReducer from './account';
 export default combineReducers({
   form,
-  auth: authReducer,
-  search: searchReducer,
+  geocoordinates: geoCoordinatesReducer,
+  criteria: criteriaReducer,
+  menu: menuReducer,
+  account: accountReducer,
 });

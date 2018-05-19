@@ -95,3 +95,21 @@ function readJson(filename, callback){
     return callback(null, parsed);
   })
 }
+
+
+function getCurrentLocation(){
+  return new Promise(function(resolve, reject){
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+
+getCurrentLocation().then(position => {
+  console.log(position);
+})
+.catch(err => {
+  console.log(err);
+});
+
+
+let p = await getCurrentLocation();
+console.log(p);

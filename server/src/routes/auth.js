@@ -1,11 +1,11 @@
+const Router = require('express').Router();
 const AuthController = require('../controllers/auth');
-const { requireLogin } = require('../middlewares/auth');
-module.exports = app => {
-  app.get('/auth/logout', AuthController.logout);
+const { requireLogin, requireGoogleAuth, getGoogleProfile } = require('../middlewares/auth');
 
-  app.post('/auth/login', requireLogin, AuthController.login);
+Router.post('/login', requireLogin, AuthController.login);
 
-  app.post('/auth/register', AuthController.register);
+Router.get('/google', requireGoogleAuth);
 
-  app.post('/auth/reset', AuthController.resetPassword);
-};
+Router.get('/google/callback', getGoogleProfile);
+
+module.exports = Router;

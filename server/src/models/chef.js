@@ -18,13 +18,10 @@ const ChefSchema = new Schema(
     },
     geoPoint: PointSchema,
     menuBook: [MenuSchema],
-    ratings: Number,
     specialty: [String],
   },
   {
-    timestamps: {
-      createdAt: true,
-    },
+    timestamps: true,
   }
 );
 

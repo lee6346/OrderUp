@@ -6,11 +6,11 @@ const passport = require('passport');
 const cors = require('cors');
 require('./services/auth/passport');
 const AuthRoutes = require('./routes/auth');
-const ChefRoutes = require('./routes/chef');
-const MenuRoutes = require('./routes/menu');
-const UploadRoutes = require('./routes/uploads');
+const UploadRoutes = require('./routes/api/uploads');
+//const BillingRoutes = require('./routes/api/billing');
+const AccountRoutes = require('./routes/api/account');
+const ChefRoutes = require('./routes/api/chef');
 require('./db/connection');
-
 const app = express();
 
 app.use(morgan('combined'));
@@ -19,10 +19,11 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-AuthRoutes(app);
-ChefRoutes(app);
-MenuRoutes(app);
+app.use('/auth', AuthRoutes);
+app.use('/api/v1/chefs', ChefRoutes);
+app.use('/api/v1/accounts', AccountRoutes);
 UploadRoutes(app);
+//app.use('/api/v1/billing', BillingRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');

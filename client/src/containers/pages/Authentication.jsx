@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RegisterUser from '../forms/RegisterUser';
+import Register from '../forms/Register';
 import './pages.css';
 
 class Authentication extends Component {
@@ -11,7 +11,7 @@ class Authentication extends Component {
             <div className="col-lg" />
             <div className="col-sm">
               <div>
-                <RegisterUser />
+                <Register />
               </div>
             </div>
           </div>

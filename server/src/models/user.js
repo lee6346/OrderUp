@@ -17,7 +17,11 @@ const UserSchema = new Schema(
         message: 'Invalid email address. Please check its format',
       },
     },
-    name: String,
+    name: {
+      type: String,
+      required: true,
+      default: 'Anonymous',
+    },
     password: {
       type: String,
       required: true,
@@ -26,15 +30,10 @@ const UserSchema = new Schema(
         message: 'Invalid password, please make sure its at least 8 characters',
       },
     },
-    registeredChef: {
-      type: Boolean,
-      default: false,
-    },
+    imageUrl: String,
   },
   {
-    timestamps: {
-      createdAt: true,
-    },
+    timestamps: true,
   }
 );
 

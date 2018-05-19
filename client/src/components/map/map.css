@@ -1,0 +1,12 @@
+.map-content{
+  height: 100%;
+}
+.map-container{
+  padding: 10px 0 10px 0;
+  height: 400px;
+}
+
+.map-sizing{
+  min-width: 400px;
+  min-height: 400px;
+}

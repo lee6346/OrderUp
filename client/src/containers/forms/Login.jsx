@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { login } from '../../actions/auth';
+import { login } from '../../actions/account';
 import { emailValidator, passwordValidator } from '../../utils/validators';
 
 class Login extends Component {
@@ -65,7 +65,7 @@ function validate(values) {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
+    errorMessage: state.account.error,
   };
 }
 
