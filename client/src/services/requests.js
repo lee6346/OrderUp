@@ -5,7 +5,6 @@ const ACCOUNT_URL = `${ROOT_URL}/api/v1/accounts`;
 const LOGIN_URL = `${ROOT_URL}/auth/login`;
 const UPLOAD_URL = `${ROOT_URL}/api/v1/uploads/aws`;
 
-const GOOGLE_CLIENT_KEY = `AIzaSyBJbc5XQaPeA7iPrHQMk8Rx1Ox3YaKadq4`;
 const GOOGLE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?key=${GOOGLE_CLIENT_KEY}&address=`;
 
 const MENUS_URL = `${ROOT_URL}/api/v1/chefs/menus?`;
