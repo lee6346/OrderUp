@@ -9,6 +9,7 @@ import RequireAuth from '../wrappers/RequireAuth';
 
 class Home extends Component {
   componentDidMount() {
+    console.log('hello');
     if (this.props.authenticated) {
       this.props.getCurrentCoordinates();
       this.props.fetchUser();
@@ -18,8 +19,10 @@ class Home extends Component {
     const { match } = this.props;
     return (
       <div>
-        <Route exact path="/home/account" component={Account} />
-        <Route exact path={match.path} component={Main} />
+        <Switch>
+          <Route exact path="/home/account" component={Account} />
+          <Route exact path={match.path} component={Main} />
+        </Switch>
       </div>
     );
   }

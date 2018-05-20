@@ -6,9 +6,9 @@ import { emailValidator, passwordValidator } from '../../utils/validators';
 import { withRouter } from 'react-router-dom';
 
 class Register extends Component {
-  handleFormSubmit({ email, name, password, repassword }) {
+  handleFormSubmit({ email, name, password }) {
     const { history } = this.props;
-    this.props.createAccount({ email, name, password, repassword }, history);
+    this.props.createAccount({ email, name, password }, history);
   }
 
   renderField(field) {
@@ -70,7 +70,7 @@ function validate(values) {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
+    errorMessage: state.account.error,
   };
 }
 

@@ -9,7 +9,7 @@ const accountMapper = {
 
 const getAccountById = async id => {
   try {
-    const result = await User.findById(id).select(accountMapper);
+    const result = await User.findById(id);
     return result;
   } catch (error) {
     throw error;
@@ -18,7 +18,7 @@ const getAccountById = async id => {
 
 const getAccountByIndex = async index => {
   try {
-    const result = await User.findOne(index).select(accountMapper);
+    const result = await User.findOne(index);
     return result;
   } catch (error) {
     throw error;
@@ -27,7 +27,7 @@ const getAccountByIndex = async index => {
 
 const updateAccount = async (id, props) => {
   try {
-    const result = await User.findByIdAndUpdate(id, props, { new: true }).select(accountMapper);
+    const result = await User.findByIdAndUpdate(id, props, { new: true });
     return result;
   } catch (error) {
     throw error;
@@ -42,11 +42,7 @@ const createAccount = async props => {
       throw new Error('Email exists');
     }
     const user = await new User(props).save();
-    return {
-      name: user.name,
-      email: user.email,
-      imageUrl: user.imageUrl,
-    };
+    return user;
   } catch (error) {
     throw error;
   }

@@ -7,12 +7,14 @@ import MenuIndex from '../features/MenuIndex';
 
 class Main extends Component {
   componentDidMount() {
+    console.log('hello from amin');
     if (this.props.authenticated) {
       this.props.retrieveMenus({
         ...this.props.geocoordinates,
         ...this.props.criteria,
       });
     }
+    console.log('goodbye');
   }
   render() {
     return (

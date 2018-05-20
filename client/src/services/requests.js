@@ -11,7 +11,7 @@ const GOOGLE_GEOCODE_API = `https://maps.googleapis.com/maps/api/geocode/json?ke
 const MENUS_URL = `${ROOT_URL}/api/v1/chefs/menus?`;
 const AWS_S3_URL = 'https://s3-us-west-2.amazonaws.com/cater-profile-bucket/';
 
-const authHeader = { Authorization: localStorage.getItem('orderUpToken') };
+const authHeader = token => ({ Authorization: token });
 const contentHeader = type => ({ 'Content-Type': type });
 
 const queryString = props => {
@@ -36,9 +36,10 @@ export const awsS3Upload = async file => {
   }
 };
 
-export const createAccount = async data => {
+export const createAccount = async body => {
   try {
-    const response = await axios.post(ACCOUNT_URL, data);
+    console.log(body);
+    const response = await axios.post(ACCOUNT_URL, body);
     let { data, data: { imageUrl } } = response;
     imageUrl = imageUrl ? AWS_S3_URL + imageUrl : undefined;
     return data;
@@ -58,9 +59,9 @@ export const login = async body => {
   }
 };
 
-export const fetchUser = async () => {
+export const fetchUser = async token => {
   try {
-    const response = await axios.get(ACCOUNT_URL, { headers: authHeader });
+    const response = await axios.get(ACCOUNT_URL, { headers: authHeader(token) });
     let { data, data: { imageUrl } } = response;
     imageUrl = imageUrl ? AWS_S3_URL + imageUrl : undefined;
     return {
@@ -73,9 +74,9 @@ export const fetchUser = async () => {
   }
 };
 
-export const retrieveMenus = async options => {
+export const retrieveMenus = async (options, token) => {
   try {
-    const response = await axios.get(MENUS_URL + queryString(options), { headers: authHeader });
+    const response = await axios.get(MENUS_URL + queryString(options), { headers: authHeader(token) });
     return response.data;
   } catch (error) {
     console.log('error retrieving menus');

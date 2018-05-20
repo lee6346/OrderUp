@@ -15,16 +15,13 @@ const errorResponse = (message, err) => {
 const create = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const existing = await accountQueries.getAccountByIndex({ email });
-    if (existing) {
-      return res.status(422).send(errorResponse('Email is already in use'));
-    }
-    let user = await accountQueries.createAccount({ email, password });
+    let result = await accountQueries.createAccount({ email, password });
+    console.log(result.id);
     res.status(200).send({
-      token: generateToken(user),
-      name: user.name,
-      email: user.email,
-      imageUrl: user.imageUrl,
+      token: generateToken(result),
+      name: result.name,
+      email: result.email,
+      imageUrl: result.imageUrl,
     });
   } catch (error) {
     res.status(400).send(errorResponse('Failed to create account', error));
@@ -36,7 +33,11 @@ const edit = async (req, res) => {
     const { user, body, error } = req;
     if (user) {
       const result = await accountQueries.updateAccount(user.id, body);
-      return res.status(200).send(result);
+      return res.status(200).send({
+        name: result.name,
+        email: result.email,
+        imageUrl: result.imageUrl,
+      });
     }
     res.status(403).send(errorResponse('unauthorized', error));
   } catch (error) {

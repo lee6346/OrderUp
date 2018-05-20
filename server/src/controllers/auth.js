@@ -16,6 +16,7 @@ const login = (req, res) => {
   console.log(req);
   const { user } = req;
   if (user) {
+    console.log(user);
     return res.status(200).send({
       token: generateToken(user),
       email: user.email,

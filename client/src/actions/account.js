@@ -13,10 +13,13 @@ export const uploadFiles = files => async dispatch => {
 
 export const createAccount = (input, history) => async dispatch => {
   try {
+    console.log(input);
     const data = await Requests.createAccount(input);
-
-    dispatch({ type: AUTH_SUCCESS, payload: data });
+    console.log(data);
     localStorage.setItem('orderUpToken', data.token);
+    console.log(localStorage.getItem('orderUpToken'));
+    dispatch({ type: AUTH_SUCCESS, payload: data });
+
     history.push('/home');
   } catch (error) {
     dispatch(authError('bad login'));
@@ -25,6 +28,7 @@ export const createAccount = (input, history) => async dispatch => {
 
 export const login = (input, history) => async dispatch => {
   try {
+    console.log(input);
     let data = await Requests.login(input);
     console.log(data);
     localStorage.setItem('orderUpToken', data.token);
@@ -38,7 +42,10 @@ export const login = (input, history) => async dispatch => {
 
 export const fetchUser = () => async dispatch => {
   try {
-    let data = await Requests.fetchUser();
+    const token = localStorage.getItem('orderUpToken');
+    console.log('token is');
+    console.log(token);
+    const data = await Requests.fetchUser(token);
     dispatch({ type: UPDATE_ACCOUNT_SUCCESS, payload: data });
   } catch (error) {
     dispatch(authError('failed to fetch user info'));
