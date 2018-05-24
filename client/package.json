@@ -8,6 +8,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/react-fontawesome": "0.0.19",
     "ajv": "^6.5.0",
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.0",
     "font-awesome": "^4.7.0",
     "google-maps-react": "^2.0.2",

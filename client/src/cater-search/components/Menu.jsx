@@ -1,20 +1,61 @@
 import React from 'react';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+
+const leftAlign = {
+  'text-align': 'left',
+};
+
+const rightAlign = {
+  'text-align': 'right',
+};
+
+const menuTitleStyle = {
+  ...leftAlign,
+  'font-size': '2vw',
+};
+
+const priceStyle = {
+  ...rightAlign,
+  'font-size': '1.2vw',
+};
+
+const distanceStyle = {
+  ...rightAlign,
+  'font-size': '1vw',
+};
+
+const ratingsStyle = {
+  ...rightAlign,
+  'font-size': '1vw',
+};
+
+const menuPadding = {
+  padding: '10px',
+};
 
 const Menu = props => {
-  const { chef, address, menuName, category, price, description } = props.menu;
+  const { menuName, price, description, ratings, distance } = props.menu;
   return (
-    <div className="row menu-style">
-      <div className="col-md-4 menu-style">
-        <FontAwesomeIcon icon="user-alt" size="lg" />
-        <div>Chef: {chef}</div>
-        <div>Location: {address}</div>
+    <div style={menuPadding}>
+      <div className="row">
+        <span className="col-md-8" style={menuTitleStyle}>
+          {menuName}
+        </span>
+        <span className="col-md-4" style={priceStyle}>
+          ${price}
+        </span>
       </div>
-      <div className="col-md-6 menu-style">
-        <div>Menu: {menuName}</div>
-        <div>Category: {category}</div>
-        <div>Price: ${price}</div>
-        <div>Description: {description}</div>
+      <div className="row">
+        <div className="col-md-8" style={leftAlign}>
+          {description}
+        </div>
+        <div className="col-md-4" style={rightAlign}>
+          <div>
+            <span style={ratingsStyle}>{ratings ? ratings : 'No Ratings'}</span>
+          </div>
+          <div>
+            <span style={distanceStyle}>{Number(distance).toFixed(1)} miles</span>
+          </div>
+        </div>
       </div>
     </div>
   );

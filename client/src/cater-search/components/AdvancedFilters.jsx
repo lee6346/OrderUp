@@ -4,15 +4,15 @@ import Select from '../../components/lists/Select';
 
 const AdvancedFilters = props => {
   return (
-    <div className="row">
-      <div className="col">
-        <Select items={DISTANCE} handleSelectChange={props.handleDistanceChange} className="form-control" />
+    <div className="row" style={{ padding: '0 30px 0 30px' }}>
+      <div className="col-md-4">
+        <Select items={DISTANCE} handleSelectChange={props.handleDistanceChange} />
       </div>
-      <div className="col">
-        <Select items={PRICE} handleSelectChange={props.handlePriceChange} className="form-control" />
+      <div className="col-md-4">
+        <Select items={PRICE} handleSelectChange={props.handlePriceChange} />
       </div>
-      <div className="col">
-        <Select items={SORT} handleSelectChange={props.handleSortChange} className="form-control" />
+      <div className="col-md-4">
+        <Select items={SORT} handleSelectChange={props.handleSortChange} />
       </div>
     </div>
   );

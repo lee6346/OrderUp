@@ -25,7 +25,6 @@ class SearchIndex extends Component {
             handleButtonClick={this.handlePageChange.bind(this)}
             currentPage={Math.floor(offset / limit) + 1}
             totalPages={Math.ceil(total / limit)}
-            className=""
           />
         ) : null}
       </div>

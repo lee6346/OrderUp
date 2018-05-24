@@ -2,9 +2,8 @@ import { RETRIEVE_MENUS_ERROR, RETRIEVE_MENUS_SUCCESS } from './types';
 import { getGeoCode, getMenus } from '../apis';
 
 export const retrieveMenus = options => async dispatch => {
-  if (options.address) {
-    const { lat, lng } = await getGeoCode(options.address);
-    options = { ...options, lat, lng };
+  if (options.distance) {
+    options = { ...options, distance: (options.distance * 1609.34).toFixed(2) };
   }
   const token = localStorage.getItem('orderUpToken');
   try {

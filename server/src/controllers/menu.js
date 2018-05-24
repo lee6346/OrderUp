@@ -64,7 +64,7 @@ const getMenuQueryParams = query => {
   return {
     lng: Number(lng).toPrecision(lng.length),
     lat: Number(lat).toPrecision(lat.length),
-    distance: Number(distance),
+    distance: distance ? Number(distance) : 30000,
     criteria: {
       category,
       keywords,

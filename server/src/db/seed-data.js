@@ -1,6 +1,5 @@
-const _ = require('lodash');
 const faker = require('faker');
-const { Db, MongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const getObjectId = require('mongoose').Types.ObjectId;
 const MIN_CHEFS = 100;
 const CHEFS_TO_ADD = 100;
@@ -14,14 +13,14 @@ const ratingsRange = {
 };
 const SPECIALTIES = ['Italian', 'Greek', 'Seafood', 'Japanese', 'Vietnamese', 'American', 'Fast Food', 'Fusion'];
 
-MongoClient.connect('mongodb://localhost:27017', function(err, client) {
+MongoClient.connect('mongodb://localhost:27017', seedData);
+
+function seedData(err, client){
   if (err) {
     console.log('failed connection: ' + err);
   }
-  console.log('no err connecting');
   const db = client.db('ChefTank');
   const chefsCollection = db.collection('chefs');
-  console.log('at chefs collection');
   chefsCollection.count({}, function(err, count) {
     if (err) {
       console.log('failed to query count: ' + err);
@@ -32,18 +31,15 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
       for (let i = 0; i < CHEFS_TO_ADD; i++) {
         chefs.push(createChefs());
       }
-      console.log(chefs);
       chefsCollection.insertMany(chefs, function(err, res) {
         if (err) {
           console.log('failed to insert data: ' + err);
         }
-
         client.close();
       });
     }
   });
-});
-console.log('HAHAH');
+}
 
 function createChefs() {
   let id = getObjectId();
@@ -62,21 +58,27 @@ function createChefs() {
         faker.random.number(generateRandomCoordinate(LATITUDE)),
       ],
     },
-    menuBook: _.times(4, () => createMenus()),
+    menuBook: createMenus(4),
     ratings: faker.random.number(ratingsRange),
-    specialty: _.times(3, () => faker.random.arrayElement(SPECIALTIES)),
+    specialty: faker.random.arrayElement(SPECIALTIES),
   };
 }
 
-function createMenus() {
-  return {
-    name: faker.lorem.words(3),
-    cuisineType: faker.random.arrayElement(SPECIALTIES),
-    price: faker.random.number({ min: 5.99, max: 32.99, precision: 4 }),
-    glutenFree: faker.random.boolean,
-    description: faker.lorem.sentences(3),
-  };
+function createMenus(amount) {
+  let menus = [];
+  for(let i = 0; i < amount; i++){
+    menus.push(getMenu());
+  }
+  return menus;
 }
+
+const getMenu = () => ({
+  name: faker.lorem.words(3),
+  cuisineType: faker.random.arrayElement(SPECIALTIES),
+  price: faker.random.number({ min: 5.99, max: 32.99, precision: 4 }),
+  glutenFree: faker.random.boolean,
+  description: faker.lorem.sentences(3),
+});
 
 function generateRandomCoordinate(start) {
   return {

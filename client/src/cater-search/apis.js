@@ -16,7 +16,9 @@ const queryString = props => {
 
 export const getMenus = async (options, token) => {
   try {
-    const response = await axios.get(MENUS_URL + queryString(options), { headers: authHeader(token) });
+    const qString = queryString(options);
+    console.log(qString);
+    const response = await axios.get(MENUS_URL + qString, { headers: authHeader(token) });
     return response.data;
   } catch (error) {
     throw error;

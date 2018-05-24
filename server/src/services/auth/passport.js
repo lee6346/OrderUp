@@ -14,3 +14,5 @@ passport.deserializeUser(async (id, done) => {
 passport.use(JwtLogin);
 passport.use(LocalLogin);
 passport.use(GoogleLogin);
+
+module.exports = passport;

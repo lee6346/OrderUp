@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setDistance, setPrice, setSort, setAddress, setKeywords } from '../actions/filters';
 import { showAdvancedFilters } from '../actions/ui';
 import { retrieveMenus } from '../actions/menus';
+import { getAddressGeocode } from '../actions/coordinates';
 import AdvancedFilters from '../components/AdvancedFilters';
 import { TextInput } from '../../components/inputs';
 import { IconButton } from '../../components/buttons';
@@ -12,14 +13,17 @@ class Search extends Component {
     const { lat: prevLat, lng: prevLng } = prev.coordinates;
     const { lat, lng } = this.props.coordinates;
     if (!(lat === prevLat && lng === prevLng)) {
-      const { filters, offset, limit } = this.props;
-      this.props.retrieveMenus({ lat, lng, ...filters, offset, limit });
+      const { filters: { address, ...rest }, offset, limit } = this.props;
+      this.props.retrieveMenus({ lat, lng, ...rest, offset, limit });
     }
   }
   handleSearchUpdate() {
     const { filters, coordinates, offset, limit } = this.props;
-
-    this.props.retrieveMenus({ ...coordinates, ...filters, offset, limit });
+    if (filters.address) {
+      this.props.getAddressGeocode(filters.address);
+    } else {
+      this.props.retrieveMenus({ ...coordinates, ...filters, offset, limit });
+    }
   }
 
   handleSortChange(sort) {
@@ -49,8 +53,8 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-md-5">
+        <div className="row" style={{ padding: '15px 0 15px 0' }}>
+          <div className="col-md-6">
             <TextInput
               placeholder="Key words"
               className="form-control"
@@ -58,7 +62,7 @@ class Search extends Component {
               handleInputChange={this.handleKeywordsChange.bind(this)}
             />
           </div>
-          <div className="col-md-5">
+          <div className="col-md-4">
             <TextInput
               placeholder="Address"
               className="form-control"
@@ -76,7 +80,15 @@ class Search extends Component {
             />
           </div>
         </div>
-        <div className="row">
+
+        {this.props.showFilters ? (
+          <AdvancedFilters
+            handlePriceChange={this.handlePriceChange.bind(this)}
+            handleDistanceChange={this.handleDistanceChange.bind(this)}
+            handleSortChange={this.handleSortChange.bind(this)}
+          />
+        ) : null}
+        <div className="row" style={{ padding: '10px 0 10px 0', 'align-content': 'right' }}>
           <IconButton
             icon="search"
             type="button"
@@ -85,13 +97,6 @@ class Search extends Component {
             handleButtonClick={this.handleFilterDisplay.bind(this)}
           />
         </div>
-        {this.props.showFilters ? (
-          <AdvancedFilters
-            handlePriceChange={this.handlePriceChange.bind(this)}
-            handleDistanceChange={this.handleDistanceChange.bind(this)}
-            handleSortChange={this.handleSortChange.bind(this)}
-          />
-        ) : null}
       </div>
     );
   }
@@ -115,4 +120,5 @@ export default connect(mapStateToProps, {
   setKeywords,
   showAdvancedFilters,
   retrieveMenus,
+  getAddressGeocode,
 })(Search);
