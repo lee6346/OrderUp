@@ -4,6 +4,8 @@ const { requireLogin, requireGoogleAuth, getGoogleProfile } = require('../middle
 
 Router.post('/login', requireLogin, AuthController.login);
 
+Router.post('/register', AuthController.register);
+
 Router.get('/google', requireGoogleAuth);
 
 Router.get('/google/callback', getGoogleProfile);

@@ -1,4 +1,3 @@
-import fontAwesome from '@fortawesome/fontawesome';
 import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
 import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 import faAngleLeft from '@fortawesome/fontawesome-free-solid/faAngleLeft';

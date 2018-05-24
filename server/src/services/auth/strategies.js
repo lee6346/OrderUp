@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../../models/user');
-const accountQueries = require('../../models/queries/account-queries');
+const userQueries = require('../../models/queries/user-queries');
 
 const JwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
@@ -15,7 +15,7 @@ const JwtOptions = {
 const JwtLogin = new JwtStrategy(JwtOptions, async (payload, done) => {
   try {
     if (payload && payload.sub) {
-      let user = await accountQueries.getAccountById(payload.sub);
+      let user = await userQueries.getUserById(payload.sub);
       return done(null, user);
     }
     return done(null, false);
@@ -50,12 +50,12 @@ const GoogleLogin = new GoogleStrategy(GoogleOptions, async (accessToken, refres
   //profile = user's google profile object
   console.log(profile);
   // first check if we have the google id in our own database
-  const existingUser = await accountQueries.getAccountByEmail({ googleId: profile.id }); //User.findOne({ googleId: profile.id });
+  const existingUser = await userQueries.getUserByIndex({ googleId: profile.id }); //User.findOne({ googleId: profile.id });
   if (existingUser) {
     done(null, existingUser);
   }
 
-  const user = await new User({ googleId: profile.id }).save();
+  const user = await userQueries.createUser({ googleId: profile.id }); //new User({ googleId: profile.id }).save();
   done(null, user);
 });
 

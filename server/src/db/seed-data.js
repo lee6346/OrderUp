@@ -3,7 +3,7 @@ const faker = require('faker');
 const { Db, MongoClient } = require('mongodb');
 const getObjectId = require('mongoose').Types.ObjectId;
 const MIN_CHEFS = 100;
-const CHEFS_TO_ADD = 20;
+const CHEFS_TO_ADD = 100;
 const LATITUDE = 47.7546262;
 const LONGITUDE = -122.1753378;
 
@@ -12,7 +12,6 @@ const ratingsRange = {
   max: 5,
   precision: 1,
 };
-console.log('YOOOOOOOOOOOO');
 const SPECIALTIES = ['Italian', 'Greek', 'Seafood', 'Japanese', 'Vietnamese', 'American', 'Fast Food', 'Fusion'];
 
 MongoClient.connect('mongodb://localhost:27017', function(err, client) {
@@ -65,7 +64,7 @@ function createChefs() {
     },
     menuBook: _.times(4, () => createMenus()),
     ratings: faker.random.number(ratingsRange),
-    specialty: _.times(3, () => faker.random.arrayElement(SPECIALTIES)), //generateSpecialties(),
+    specialty: _.times(3, () => faker.random.arrayElement(SPECIALTIES)),
   };
 }
 

@@ -6,13 +6,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
-import axios from 'axios';
 import fontIcons from './assets/font-awsome-icons';
 import fontAwesome from '@fortawesome/fontawesome';
-import { TOKEN_AUTHENTICATE } from './constants/action-types';
+import { TOKEN_AUTH } from './auth/actions/types';
 import App from './App';
-import reducers from './reducers';
-import { logger } from './utils/middlewares';
+import reducers, { logger } from './configReducers';
 fontAwesome.library.add(...fontIcons);
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, logger)(createStore);
@@ -20,7 +18,7 @@ const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('orderUpToken');
 if (token) {
-  store.dispatch({ type: TOKEN_AUTHENTICATE });
+  store.dispatch({ type: TOKEN_AUTH });
 }
 
 ReactDOM.render(

@@ -1,13 +1,13 @@
 const passport = require('passport');
 const { JwtLogin, LocalLogin, GoogleLogin } = require('./strategies');
-const accountQueries = require('../../models/queries/account-queries');
+const userQueries = require('../../models/queries/user-queries');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await accountQueries.getAccountById(id);
+  const user = await userQueries.getUserById(id);
   done(null, user);
 });
 

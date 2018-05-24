@@ -43,12 +43,12 @@ const updateMenu = async (chefId, menuId, menuProps) => {
  * @param {Number} offset: skip quantity for paginated queries
  * @param {Number} limit: record quantity after skip for paginated queries
  */
-const getMenus = async (lat, lng, distance = 10000, criteria, sortby, offset = 0, limit = 10) => {
+const getMenus = async (lat, lng, distance = 10000, criteria, sort, offset = 0, limit = 10) => {
   try {
     const menus = await Chef.aggregate([geoQuery(lat, lng, distance)])
       .unwind('$menuBook')
       .match(matchBuilder(criteria))
-      .sort({ [sortby]: 1 })
+      .sort({ [sort]: 1 })
       .skip(Number(offset))
       .limit(Number(limit))
       .project({
@@ -116,9 +116,9 @@ const matchBuilder = criteria => {
     };
   }
 
-  if (criteria.search) {
+  if (criteria.keywords) {
     query['menuBook.description'] = {
-      $regex: criteria.search,
+      $regex: criteria.keywords,
       $options: 'i',
     };
   }

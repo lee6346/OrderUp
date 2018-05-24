@@ -60,14 +60,14 @@ const retrieve = async (req, res) => {
 };
 
 const getMenuQueryParams = query => {
-  const { lng, lat, distance, sort, price, category, offset, limit, search } = query;
+  const { lng, lat, distance, sort, price, category, offset, limit, keywords } = query;
   return {
     lng: Number(lng).toPrecision(lng.length),
     lat: Number(lat).toPrecision(lat.length),
     distance: Number(distance),
     criteria: {
       category,
-      search,
+      keywords,
       price: price ? Number(price).toPrecision(price.length) : undefined,
     },
     limit: limit ? Number(limit) : undefined,

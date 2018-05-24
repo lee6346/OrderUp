@@ -8,7 +8,7 @@ require('./services/auth/passport');
 const AuthRoutes = require('./routes/auth');
 const UploadRoutes = require('./routes/api/uploads');
 //const BillingRoutes = require('./routes/api/billing');
-const AccountRoutes = require('./routes/api/account');
+const UserRoutes = require('./routes/api/user');
 const ChefRoutes = require('./routes/api/chef');
 require('./db/connection');
 const app = express();
@@ -21,7 +21,7 @@ app.use(passport.session());
 
 app.use('/auth', AuthRoutes);
 app.use('/api/v1/chefs', ChefRoutes);
-app.use('/api/v1/accounts', AccountRoutes);
+app.use('/api/v1/users', UserRoutes);
 UploadRoutes(app);
 //app.use('/api/v1/billing', BillingRoutes);
 

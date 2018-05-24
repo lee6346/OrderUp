@@ -1,4 +1,4 @@
-const accountQueries = require('../models/queries/account-queries');
+const userQueries = require('../models/queries/user-queries');
 const { generateToken } = require('../services/auth/helpers');
 
 const errorResponse = (message, err) => {
@@ -13,18 +13,25 @@ const errorResponse = (message, err) => {
  * @param {Object} res
  */
 const login = (req, res) => {
-  console.log(req);
   const { user } = req;
   if (user) {
-    console.log(user);
     return res.status(200).send({
       token: generateToken(user),
-      email: user.email,
-      name: user.name,
-      imageUrl: user.imageUrl,
     });
   }
   res.status(401).send(errorResponse('login failed'));
+};
+
+const register = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    let result = await userQueries.createUser({ email, password });
+    res.status(200).send({
+      token: generateToken(result),
+    });
+  } catch (error) {
+    res.status(400).send(errorResponse('Failed to create account', error));
+  }
 };
 
 const loginToken = (req, res) => {
@@ -47,4 +54,5 @@ module.exports = {
   login,
   loginToken,
   resetPassword,
+  register,
 };
