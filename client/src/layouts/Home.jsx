@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { useCurrentCoordinates } from '../cater-search/actions/coordinates';
+import { useCurrentCoordinates } from '../cater-search/actions';
 import { fetchUser } from '../user/actions';
 import MainPage from '../cater-search/MainPage';
 import UserPage from '../user/UserPage';

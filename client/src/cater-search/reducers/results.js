@@ -10,6 +10,7 @@ const INIT = {
 export default (state = INIT, action) => {
   switch (action.type) {
     case RETRIEVE_MENUS_SUCCESS:
+      console.log(action.payload);
       return { ...state, ...action.payload };
     default:
       return state;

@@ -16,7 +16,8 @@ const login = (req, res) => {
   const { user } = req;
   if (user) {
     return res.status(200).send({
-      token: generateToken(user),
+      token: generateToken(user._id),
+      //token: generateToken(user),
     });
   }
   res.status(401).send(errorResponse('login failed'));
@@ -25,26 +26,16 @@ const login = (req, res) => {
 const register = async (req, res) => {
   try {
     const { email, password } = req.body;
-    let result = await userQueries.createUser({ email, password });
+    const user = await userQueries.createUser({ email, password });
     res.status(200).send({
-      token: generateToken(result),
+      token: generateToken(user._id),
+      //token: generateToken(user)
     });
   } catch (error) {
     res.status(400).send(errorResponse('Failed to create account', error));
   }
 };
 
-const loginToken = (req, res) => {
-  const { user } = req;
-  if (user) {
-    return res.status(200).send({
-      email: user.email,
-      name: user.name,
-      imageUrl: user.imageUrl,
-    });
-  }
-  res.status(401).send(errorResponse('bad token'));
-};
 
 const resetPassword = async (req, res) => {
   res.send({ test });
@@ -52,7 +43,6 @@ const resetPassword = async (req, res) => {
 
 module.exports = {
   login,
-  loginToken,
   resetPassword,
   register,
 };

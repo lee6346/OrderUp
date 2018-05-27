@@ -40,6 +40,12 @@ const LocalLogin = new LocalStrategy(LocalOptions, async (email, password, done)
   done(null, user);
 });
 
+/**
+ * Google O AUth flow
+ * 1) user clicks Google Login button
+ * 2) Client sends request to our server router /auth/register/google
+ * 3) router for
+ */
 const GoogleOptions = {
   clientID: keys.googleClientID,
   clientSecret: keys.googleClientSecret,
@@ -47,15 +53,22 @@ const GoogleOptions = {
 };
 
 const GoogleLogin = new GoogleStrategy(GoogleOptions, async (accessToken, refreshToken, profile, done) => {
-  //profile = user's google profile object
-  console.log(profile);
-  // first check if we have the google id in our own database
-  const existingUser = await userQueries.getUserByIndex({ googleId: profile.id }); //User.findOne({ googleId: profile.id });
+  let existingUser = await userQueries.getUserByIndex({ googleId: profile.id });
   if (existingUser) {
-    done(null, existingUser);
+    return done(null, existingUser);
+  }
+  existingUser = await userQueries.getUserByIndex({ email: profile.emails[0].value });
+  if (existingUser) {
+    const updatedUser = await userQueries.updateUser(existingUser._id, { googleId: profile.id });
+    return done(null, updatedUser);
   }
 
-  const user = await userQueries.createUser({ googleId: profile.id }); //new User({ googleId: profile.id }).save();
+  const props = {
+    googleId: profile.id,
+    email: profile.emails[0].value,
+    name: profile.displayName,
+  };
+  const user = await userQueries.createUser(props);
   done(null, user);
 });
 

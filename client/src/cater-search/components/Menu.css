@@ -1,0 +1,6 @@
+:local(.menu){
+  padding: 10px;
+}
+:local(.menu-row){
+  padding: 10px 0;
+};

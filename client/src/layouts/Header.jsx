@@ -16,7 +16,7 @@ class Header extends Component {
         <div className="collapse navbar-collapse" id="navHeaderContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item dropdown">
-              <a className="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" area-expanded="false">
+              <a className="nav-link" data-toggle="dropdown">
                 <FontAwesomeIcon icon="user" />
               </a>
               <div className="dropdown-menu dropdown-menu-right">
@@ -54,20 +54,12 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-sm navbar-light">
         <Link to="/" className="navbar-brand">
           LEGUME
         </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navHeaderContent"
-          aria-controls="navHeaderContent"
-          aria-expanded="false"
-          aria-label="Toggle Navigation"
-        >
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navHeaderContent">
           <span className="navbar-toggler-icon" />
         </button>
         {this.renderContent()}

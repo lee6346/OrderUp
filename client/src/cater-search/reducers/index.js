@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 
-import coordinatesReducer from './coordinates';
-import filtersReducer from './filters';
-import menusReducer from './menus';
 import uiReducer from './ui';
+import resultsReducer from './results';
+import criteriaReducer from './criteria';
 
 export default combineReducers({
-  coordinates: coordinatesReducer,
-  filters: filtersReducer,
-  menus: menusReducer,
+  criteria: criteriaReducer,
+  results: resultsReducer,
   ui: uiReducer,
 });

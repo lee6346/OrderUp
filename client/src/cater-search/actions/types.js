@@ -1,11 +1,6 @@
 //criteria
-export const SET_DISTANCE = 'SET_DISTANCE';
-export const SET_PRICE = 'SET_PRICE';
-export const SET_SORT = 'SET_SORT';
 export const SET_KEYWORDS = 'SET_KEYWORDS';
-export const SET_ADDRESS = 'SET_ADDRESS';
-export const SET_FOOD_CATEGORY = 'SET_FOOD_CATEGORY';
-
+export const UPDATE_FILTERS = 'UPDATE_FILTERS';
 //ui
 export const SHOW_ADVANCED_FILTERS = 'SHOW_ADVANCED_FILTERS';
 

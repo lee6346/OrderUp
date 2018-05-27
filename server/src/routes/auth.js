@@ -8,6 +8,6 @@ Router.post('/register', AuthController.register);
 
 Router.get('/google', requireGoogleAuth);
 
-Router.get('/google/callback', getGoogleProfile);
+Router.get('/google/callback', getGoogleProfile, AuthController.login);
 
 module.exports = Router;

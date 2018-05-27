@@ -15,7 +15,6 @@ fontAwesome.library.add(...fontIcons);
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, logger)(createStore);
 const store = createStoreWithMiddleware(reducers);
-
 const token = localStorage.getItem('orderUpToken');
 if (token) {
   store.dispatch({ type: TOKEN_AUTH });
