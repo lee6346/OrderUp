@@ -1,4 +1,4 @@
-const keys = require('../../../config/keys');
+const authConfig = require('../../config').auth;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require('passport-local');
@@ -9,7 +9,7 @@ const userQueries = require('../../models/queries/user-queries');
 
 const JwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: keys.jwtSecret,
+  secretOrKey: authConfig.jwtSecret,
 };
 
 const JwtLogin = new JwtStrategy(JwtOptions, async (payload, done) => {
@@ -40,15 +40,9 @@ const LocalLogin = new LocalStrategy(LocalOptions, async (email, password, done)
   done(null, user);
 });
 
-/**
- * Google O AUth flow
- * 1) user clicks Google Login button
- * 2) Client sends request to our server router /auth/register/google
- * 3) router for
- */
 const GoogleOptions = {
-  clientID: keys.googleClientID,
-  clientSecret: keys.googleClientSecret,
+  clientID: authConfig.google.clientId,
+  clientSecret: authConfig.google.clientSecret,
   callbackURL: '/auth/google/callback',
 };
 

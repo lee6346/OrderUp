@@ -20,6 +20,16 @@ export const fetchUser = () => async dispatch => {
   }
 };
 
+export const updateUser = options => async dispatch => {
+  try {
+    const token = localStorage.getItem('orderUpToken');
+    const data = await Requests.updateUser(options, token);
+    dispatch(updateUserSuccess(data));
+  } catch (error) {
+    dispatch(updateUserError('failed to update user profile'));
+  }
+};
+
 const retrieveUserSuccess = data => ({
   type: RETRIEVE_USER_SUCCESS,
   payload: data,

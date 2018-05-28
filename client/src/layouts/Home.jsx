@@ -17,7 +17,7 @@ class Home extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/home/account" component={UserPage} />
+          <Route path="/home/account" component={UserPage} />
           <Route exact path={match.path} component={MainPage} />
         </Switch>
       </div>

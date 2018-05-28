@@ -8,7 +8,6 @@ class OAuthSuccess extends Component {
     this.props.history.replace('/home');
   }
   render() {
-    console.log(this.props.match);
     return <div>Waiting...</div>;
   }
 }

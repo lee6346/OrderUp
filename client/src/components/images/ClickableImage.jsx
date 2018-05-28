@@ -1,8 +1,14 @@
 import React from 'react';
 
 const ClickableImage = props => (
-  <div className={props.className} onClick={props.handleImageClick}>
-    <img src={props.imageUrl} height={props.height} width={props.width} alt="expandable" />
+  <div onClick={props.handleImageClick}>
+    <img
+      src={props.imageUrl}
+      className={props.className}
+      style={props.style}
+      height={props.height}
+      width={props.width}
+    />
   </div>
 );
 

@@ -1,17 +1,11 @@
 const jwt = require('jwt-simple');
 const bcrypt = require('bcryptjs');
-const keys = require('../../../config/keys');
-/*
-const generateToken = function(user) {
-  const timestamp = new Date().getTime();
-  const expiration = timestamp + 1800;
-  return jwt.encode({ sub: user.id, iat: timestamp, exp: expiration }, keys.jwtSecret);
-};
-*/
+const jwtSecret = require('../../config').auth.jwtSecret;
+
 const generateToken = function(userId) {
   const timestamp = new Date().getTime();
   const expiration = timestamp + 1800;
-  return jwt.encode({ sub: userId, iat: timestamp, exp: expiration }, keys.jwtSecret);
+  return jwt.encode({ sub: userId, iat: timestamp, exp: expiration }, jwtSecret);
 };
 
 const hashAndSalt = async function(password) {

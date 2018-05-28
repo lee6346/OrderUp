@@ -1,25 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserInfo from '../components/UserInfo';
-import { ClickableImage } from '../../components/images';
-class UserProfile extends Component {
-  expandImage() {}
+import { Field, reduxForm } from 'redux-form';
+import { updateUser } from '../actions';
 
-  render() {
-    const { name, email, imageUrl } = this.props.user;
+class UserProfile extends Component {
+  handleFormSubmit({ email, name }) {
+    this.props.updateUser({ email, name });
+  }
+
+  renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
     return (
-      <div>
-        <ClickableImage handleImageClick={this.expandImage.bind(this)} imageUrl={imageUrl} height={300} width={300} />
-        <UserInfo name={name} email={email} />
-      </div>
+      <fieldset className={className}>
+        <label>{field.label}</label>
+        <input type={field.type} className="form-control" {...field.input} />
+        <div className="text-help">{touched ? error : ''}</div>
+      </fieldset>
+    );
+  }
+  renderAlert() {
+    if (this.props.error) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.error}
+        </div>
+      );
+    }
+  }
+  render() {
+    const { handleSubmit } = this.props;
+
+    return (
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <Field label="Email" name="email" type="text" component={this.renderField} />
+        <Field label="Name" name="name" type="text" component={this.renderField} />
+        {this.renderAlert()}
+
+        <button action="submit" className="btn btn-primary">
+          Update Profile
+        </button>
+      </form>
     );
   }
 }
-
 function mapStateToProps(state) {
   return {
     user: state.user,
   };
 }
-
-export default connect(mapStateToProps)(UserProfile);
+export default reduxForm({
+  form: 'profile',
+})(connect(mapStateToProps, { updateUser })(UserProfile));

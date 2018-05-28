@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const keys = require('../../config/keys');
+const mongoConfig = require('../config').db.mongo;
 
-mongoose.connect(keys.mongoURI).catch(err => {
+mongoose.connect(mongoConfig.uri).catch(err => {
   console.log(err);
 });
 

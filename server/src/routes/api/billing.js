@@ -1,6 +1,6 @@
 const Router = require('express').Router();
-const keys = require('../../../config/keys');
-const stripe = require('stripe')(keys.stripeSecretKey);
+const stripeConfig = require('../../config').apiKeys.stripe;
+const stripe = require('stripe')(stripeConfig.publishableKey);
 const { requireJwtAuth } = require('../../middlewares/auth');
 
 Router.post('/stripe', requireJwtAuth, async (req, res) => {

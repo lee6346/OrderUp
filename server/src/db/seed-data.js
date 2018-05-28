@@ -15,7 +15,7 @@ const SPECIALTIES = ['Italian', 'Greek', 'Seafood', 'Japanese', 'Vietnamese', 'A
 
 MongoClient.connect('mongodb://localhost:27017', seedData);
 
-function seedData(err, client){
+function seedData(err, client) {
   if (err) {
     console.log('failed connection: ' + err);
   }
@@ -66,7 +66,7 @@ function createChefs() {
 
 function createMenus(amount) {
   let menus = [];
-  for(let i = 0; i < amount; i++){
+  for (let i = 0; i < amount; i++) {
     menus.push(getMenu());
   }
   return menus;
