@@ -12,6 +12,17 @@ export const login = (input, history) => async dispatch => {
   }
 };
 
+export const googleAuth = history => async dispatch => {
+  try {
+    let token = await Requests.googleAuth();
+    localStorage.setItem('orderUpToken', token);
+    dispatch(authSuccess());
+    history.push('/home');
+  } catch (error) {
+    dispatch(authError('bad login'));
+  }
+};
+
 export const register = (input, history) => async dispatch => {
   try {
     let token = await Requests.register(input);
@@ -31,7 +42,7 @@ export const logout = history => dispatch => {
 
 const unAuthenticate = () => ({ type: UNAUTHENTICATE });
 
-const authSuccess = () => ({ type: AUTH_SUCCESS });
+export const authSuccess = () => ({ type: AUTH_SUCCESS });
 
 const authError = error => ({
   type: AUTH_ERROR,

@@ -4,6 +4,10 @@ import { withRouter, Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { logout } from '../auth/actions';
 
+const headerStyle = {
+  backgroundColor: '#e7dcd7',
+};
+
 class Header extends Component {
   handleLogout() {
     const { history } = this.props;
@@ -54,8 +58,8 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-sm navbar-light">
-        <Link to="/" className="navbar-brand">
+      <nav style={headerStyle} className="navbar navbar-expand-sm navbar-light">
+        <Link to="/" className="navbar-brand" style={{ text: '#61443a' }}>
           LEGUME
         </Link>
 

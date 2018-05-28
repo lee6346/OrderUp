@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { login } from '../actions';
+import GoogleAuthLink from '../components/GoogleAuthLink';
+import { login, googleAuth } from '../actions';
 import { emailValid, passwordValid } from '../helpers';
 
 class Login extends Component {
   handleFormSubmit({ email, password }) {
     const { history } = this.props;
     this.props.login({ email, password }, history);
+  }
+  handleGoogleLogin() {
+    const { history } = this.props;
+    this.props.googleAuth(history);
   }
 
   renderField(field) {
@@ -37,16 +42,21 @@ class Login extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <Field label="Email" name="email" type="text" component={this.renderField} />
-        <Field label="Password" name="password" type="text" component={this.renderField} />
-        {this.renderAlert()}
-        <div>
-          <button action="submit" className="btn btn-primary">
-            Log in
-          </button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <Field label="Email" name="email" type="text" component={this.renderField} />
+          <Field label="Password" name="password" type="text" component={this.renderField} />
+          {this.renderAlert()}
+          <div>
+            <button action="submit" className="btn btn-primary form-control">
+              Log in
+            </button>
+          </div>
+          <div style={{ padding: '30px 0' }}>
+            <GoogleAuthLink />
+          </div>
+        </form>
+      </div>
     );
   }
 }
@@ -71,4 +81,4 @@ function mapStateToProps(state) {
 export default reduxForm({
   validate,
   form: 'login',
-})(connect(mapStateToProps, { login })(withRouter(Login)));
+})(connect(mapStateToProps, { login, googleAuth })(withRouter(Login)));

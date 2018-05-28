@@ -16,14 +16,13 @@ app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 app.use('/auth', AuthRoutes);
 app.use('/api/v1/chefs', ChefRoutes);
 app.use('/api/v1/users', UserRoutes);
 UploadRoutes(app);
 //app.use('/api/v1/billing', BillingRoutes);
-
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
   app.use(express.static(path.resolve(__dirname, '..', '..', 'client', 'build')));

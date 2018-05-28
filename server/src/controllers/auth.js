@@ -23,6 +23,17 @@ const login = (req, res) => {
   res.status(401).send(errorResponse('login failed'));
 };
 
+const googleLogin = (req, res) => {
+  //console.log(req);
+  console.log(req.query);
+  const { user } = req;
+  if (user) {
+    const token = generateToken(user._id);
+    return res.redirect(`/oauthsuccess/${token}`);
+  }
+  res.status(401).send(errorResponse('login failed'));
+};
+
 const register = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -36,7 +47,6 @@ const register = async (req, res) => {
   }
 };
 
-
 const resetPassword = async (req, res) => {
   res.send({ test });
 };
@@ -45,4 +55,5 @@ module.exports = {
   login,
   resetPassword,
   register,
+  googleLogin,
 };
